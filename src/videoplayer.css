@@ -1,0 +1,101 @@
+.video-player {
+    margin-left: 20px;
+  }
+
+
+  .overlay-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .overlay-list button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+
+  .overlay-list li {
+    margin-bottom: 10px;
+  }
+
+
+
+  .control-buttons {
+    margin-top: 20px;
+  }
+  
+  .control-buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-left: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .control-buttons button:hover {
+    background-color: #218838;
+  }
+
+
+
+  .delete-btn {
+    margin-left: 10px;
+
+  }
+  
+
+
+
+  .utility button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+
+  input[type="text"] {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 100%;
+    max-width: 400px; /* Adjust the max-width as needed */
+    padding: 12px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  input[type="text"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #007BFF; /* Blue highlight */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    background-color: #fff;
+  }
+  
+  input[type="text"]:hover {
+    border-color: #ccc;
+  }
