@@ -163,13 +163,13 @@ def generate():
 def video_feed():
     return Response(generate(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-
+'''
 if __name__ == '__main__':
     t = threading.Thread(target=stream, args=(32,))
     t.daemon = True
     t.start()
  
     app.run(host='0.0.0.0', port=8000, debug=True, threaded=True, use_reloader=False)
-
+'''
 cap.release()
 cv2.destroyAllWindows()
