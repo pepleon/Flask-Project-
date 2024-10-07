@@ -5,22 +5,22 @@ const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [videoStream, setVideoStream] = useState('http://localhost:8000/video_feed');
-  const [overlays, setOverlays] = useState([]); // Current overlays
-  const [savedOverlaySets, setSavedOverlaySets] = useState([]); // Saved overlay sets
-  const [overlayContent, setOverlayContent] = useState(''); // Overlay text
-  const [overlayImage, setOverlayImage] = useState(''); // Overlay image URL
-  const [overlayPosition, setOverlayPosition] = useState({ x: 10, y: 30 }); // Position for new overlay
-  const [overlaySize, setOverlaySize] = useState({ width: 100, height: 50 }); // Size for new overlay
+  const [overlays, setOverlays] = useState([]); 
+  const [savedOverlaySets, setSavedOverlaySets] = useState([]); 
+  const [overlayContent, setOverlayContent] = useState(''); 
+  const [overlayImage, setOverlayImage] = useState(''); 
+  const [overlayPosition, setOverlayPosition] = useState({ x: 10, y: 30 }); 
+  const [overlaySize, setOverlaySize] = useState({ width: 100, height: 50 }); 
 
   useEffect(() => {
-    // Fetch saved overlays when the component mounts
+    
     const fetchOverlays = async () => {
       const response = await fetch('/overlays');
       const data = await response.json();
-      ///setSavedOverlaySets(data); // Assuming data is an array of overlay sets
+
       console.log("Fetched overlays:", data);
       if (Array.isArray(data)) {
-        setSavedOverlaySets(data); // Assuming data is an array of overlay sets
+        setSavedOverlaySets(data); 
       } else {
         console.error("Fetched data is not an array:", data);
       }
@@ -39,43 +39,6 @@ const VideoPlayer = () => {
     setIsMuted(prev => !prev);
   };
 
-/*
-  // Add new overlay
-  const handleAddOverlay = async () => {
-    const newOverlay = { 
-      content: overlayContent, 
-      image: overlayImage, 
-      x: overlayPosition.x, 
-      y: overlayPosition.y, 
-      width: overlaySize.width, 
-      height: overlaySize.height 
-    };
-
-    // Send a POST request to save the overlay
-   const response = await fetch('/save-overlay', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newOverlay)
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log('Overlay saved:', data);
-      setOverlays([...overlays, newOverlay]); // Add to current overlays
-      setOverlayContent(''); // Reset content
-      setOverlayImage(''); // Reset image URL
-      setOverlayPosition({ x: 10, y: 30 }); // Reset position
-      setOverlaySize({ width: 100, height: 50 }); // Reset size
-    } else {
-      console.error('Error saving overlay');
-    }
-  
-
-  };
-*/
-
 
 
 ///////////////////////////////////////////////////////////
@@ -90,7 +53,7 @@ const handleAddOverlay2 = async () => {
     height: overlaySize.height 
   };
 
-  // Send a POST request to save the overlay
+  
  const response = await fetch('/save-overlay', {
     method: 'POST',
     headers: {
@@ -102,11 +65,11 @@ const handleAddOverlay2 = async () => {
   if (response.ok) {
     const data = await response.json();
     console.log('Overlay saved:', data);
-    setOverlays([...overlays, newOverlay]); // Add to current overlays
-    setOverlayContent(''); // Reset content
-    setOverlayImage(''); // Reset image URL
-    setOverlayPosition({ x: 10, y: 30 }); // Reset position
-    setOverlaySize({ width: 100, height: 50 }); // Reset size
+    setOverlays([...overlays, newOverlay]); 
+    setOverlayContent(''); 
+    setOverlayImage(''); 
+    setOverlayPosition({ x: 10, y: 30 }); 
+    setOverlaySize({ width: 100, height: 50 }); 
   } else {
     console.error('Error saving overlay');
   }
@@ -119,7 +82,7 @@ const handleAddOverlay2 = async () => {
 
 
 
-// Add new overlay locally, without calling the API
+
 const handleAddOverlay = () => {
 
   const newOverlay = {
@@ -131,14 +94,14 @@ const handleAddOverlay = () => {
     height: overlaySize.height,
   };
 
-  // Update the local overlay state (add the new overlay)
+  
   setOverlays([...overlays, newOverlay]);
 
-  // Reset input fields for adding a new overlay
-  setOverlayContent(''); // Reset content
-  setOverlayImage(''); // Reset image URL
-  setOverlayPosition({ x: 10, y: 30 }); // Reset position
-  setOverlaySize({ width: 100, height: 50 }); // Reset size
+  
+  setOverlayContent(''); 
+  setOverlayImage(''); 
+  setOverlayPosition({ x: 10, y: 30 }); 
+  setOverlaySize({ width: 100, height: 50 }); 
 };
 
 
@@ -154,23 +117,16 @@ const handleAddOverlay = () => {
 
 
 
-  // Save current overlays to the saved list (as a group/set)
-  /*const handleSaveOverlays =  () => {
-    if (overlays.length > 0) {
-      setSavedOverlaySets([...savedOverlaySets, overlays]); // Save the entire set of overlays
-      setOverlays([]); // Clear current overlays after saving
-    }
-  };
-*/
+
 
 ///////////////////////////////////
 
-// Save all overlays to the database after final creation/adjustment
+
 const handleSaveOverlays = async () => {
 
   const mostRecentOverlay = overlays[overlays.length - 1];
 
-  // Send a POST request to save the overlay
+  
  const response = await fetch('/save-overlay', {
     method: 'POST',
     headers: {
@@ -182,7 +138,7 @@ const handleSaveOverlays = async () => {
   if (response.ok) {
     const data = await response.json();
     console.log('Overlay saved:', data);
-    setOverlays([mostRecentOverlay]); // Add to current overlays
+    setOverlays([mostRecentOverlay]); 
   
   } else {
     console.error('Error saving overlay');
@@ -205,17 +161,17 @@ const handleSaveOverlays = async () => {
 
 
 ///////////////////////////////////////////////
-  // Select an overlay set from the saved list and display all overlays in that set
+  
   const handleSelectOverlaySet = (index) => {
-    //setOverlays(savedOverlaySets[index]); // Show all overlays from the selected set
+   
     const selectedSet = savedOverlaySets[index]; 
     console.log("Selected Overlay Set Index:", index);
     console.log("Overlay Set Content:", savedOverlaySets[index]);
 
-     // Check if selectedSet is an object
+     
   if (selectedSet && typeof selectedSet === "object") {
-    // Assuming 'overlays' is an array where you want to push the selected overlay
-    setOverlays([selectedSet]); // Wrap it in an array
+  
+    setOverlays([selectedSet]);
   } else {
     console.error("Selected overlay set is not defined or is not an object");
   }
@@ -224,77 +180,22 @@ const handleSaveOverlays = async () => {
 
 
 
- /* 
-  const handleSelectOverlaySet = async (index) => {
-    const overlaySetId = savedOverlaySets[index]._id; // Assuming you have an ID for the overlay set
-   console.log(overlaySetId);
-   setOverlays(savedOverlaySets[index]);
-    // Fetch overlays from the server
-    const response = await fetch(`/overlays/${overlaySetId}`);
-    if (response.ok) {
-      const overlays = await response.json();
-      console.log(overlays);
-      // setOverlays(overlays); // Set fetched overlays
-      
-    } else {
-      console.error('Error fetching overlays');
-    }
-  };
-  
-
-  */
-
-
-/*
-  // Delete an overlay set from the saved list
-  const handleDeleteOverlaySet = async (overlayId, index) => {
-    // Check if overlayId is provided
-    if (!overlayId) {
-      console.error("No overlay ID provided");
-      return;
-    }
-  
-    // Send a DELETE request to the server
-    const response = await fetch(`/overlays/${overlayId}`, { method: 'DELETE' });
-    
-    if (!response.ok) {
-      console.error(`Error deleting overlay with ID ${overlayId}`);
-    } else {
-      // Update the state to remove the overlay from the array
-      const updatedSets = savedOverlaySets.map(set => 
-        set.filter(overlay => overlay._id !== overlayId) // Remove the specific overlay
-      );
-  
-      setSavedOverlaySets(updatedSets); // Update the saved overlay sets
-    }
-
-    const updatedOverlays = overlays.filter((_, i) => i !== index);
-    setSavedOverlaySets(updatedOverlays);
-
-  };
-  
-*/
-
-
-
 const handleDeleteOverlaySet = async (overlayId, index) => {
-  // Check if overlayId is provided
+  
   if (!overlayId) {
     console.error("No overlay ID provided");
     return;
   }
 
-  // Send a DELETE request to the server
   const response = await fetch(`/overlays/${overlayId}`, { method: 'DELETE' });
 
   if (!response.ok) {
     console.error(`Error deleting overlay with ID ${overlayId}`);
   } else {
-    // Remove the deleted overlay set from the state by filtering it out
+    
     const updatedSets = savedOverlaySets.filter((_, i) => i !== index);
-    setSavedOverlaySets(updatedSets); // Update saved overlay sets
-
-    // If necessary, also update the current `overlays` to remove any associated overlays
+    setSavedOverlaySets(updatedSets); 
+    
     if (overlays.some(overlay => overlay._id === overlayId)) {
       setOverlays(overlays.filter(overlay => overlay._id !== overlayId));
     }
@@ -320,12 +221,12 @@ const handleDeleteOverlaySet = async (overlayId, index) => {
 
 
 
-  // Clear the current overlays but don't delete saved ones
+  
   const handleNewOverlay = () => {
-    setOverlays([]); // Clear current overlays
+    setOverlays([]); 
   };
 
-  // Dragging logic for overlays
+ 
   const handleMouseDown = (e, overlayIndex) => {
     e.preventDefault();
     const offsetX = e.clientX - overlays[overlayIndex].x;
@@ -352,12 +253,12 @@ const handleDeleteOverlaySet = async (overlayId, index) => {
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
-  // Handle resizing of the overlay
+  
   const handleResize = (e, overlayIndex) => {
     const newWidth = e.clientX - overlays[overlayIndex].x;
     const newHeight = e.clientY - overlays[overlayIndex].y;
 
-    if (newWidth > 20 && newHeight > 20) { // Minimum size constraints
+    if (newWidth > 20 && newHeight > 20) {
       setOverlays(overlays.map((overlay, index) => 
         index === overlayIndex ? { ...overlay, width: newWidth, height: newHeight } : overlay
       ));
@@ -388,7 +289,7 @@ const handleDeleteOverlaySet = async (overlayId, index) => {
                 padding: '5px',
                 borderRadius: '5px',
               }}
-              onMouseDown={(e) => handleMouseDown(e, index)} // Make draggable
+              onMouseDown={(e) => handleMouseDown(e, index)} 
             >
               {overlay.image && (
                 <img 
@@ -400,7 +301,7 @@ const handleDeleteOverlaySet = async (overlayId, index) => {
               {overlay.content && <div>{overlay.content}</div>}
               <div
                 onMouseDown={(e) => {
-                  e.stopPropagation(); // Prevent drag during resize
+                  e.stopPropagation(); 
                   const mouseMoveHandler = (moveEvent) => handleResize(moveEvent, index);
                   const mouseUpHandler = () => {
                     document.removeEventListener('mousemove', mouseMoveHandler);
